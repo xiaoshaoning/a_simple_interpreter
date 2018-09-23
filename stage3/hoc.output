@@ -1,0 +1,475 @@
+Terminals unused in grammar
+
+   UNDEF
+
+
+State 10 conflicts: 1 shift/reduce
+
+
+Grammar
+
+    0 $accept: list $end
+
+    1 list: %empty
+    2     | list '\n'
+    3     | list asgn '\n'
+    4     | list expr '\n'
+    5     | list error '\n'
+
+    6 asgn: VAR '=' expr
+
+    7 expr: NUMBER
+    8     | VAR
+    9     | asgn
+   10     | BLTIN '(' expr ')'
+   11     | expr '+' expr
+   12     | expr '-' expr
+   13     | expr '*' expr
+   14     | expr '/' expr
+   15     | expr '^' expr
+   16     | '(' expr ')'
+   17     | '-' expr
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+'\n' (10) 2 3 4 5
+'(' (40) 10 16
+')' (41) 10 16
+'*' (42) 13
+'+' (43) 11
+'-' (45) 12 17
+'/' (47) 14
+'=' (61) 6
+'^' (94) 15
+error (256) 5
+NUMBER (258) 7
+VAR (259) 6 8
+BLTIN (260) 10
+UNDEF (261)
+UNARYMINUS (262)
+
+
+Nonterminals, with rules where they appear
+
+$accept (17)
+    on left: 0
+list (18)
+    on left: 1 2 3 4 5, on right: 0 2 3 4 5
+asgn (19)
+    on left: 6, on right: 3 9
+expr (20)
+    on left: 7 8 9 10 11 12 13 14 15 16 17, on right: 4 6 10 11 12
+    13 14 15 16 17
+
+
+State 0
+
+    0 $accept: . list $end
+
+    $default  reduce using rule 1 (list)
+
+    list  go to state 1
+
+
+State 1
+
+    0 $accept: list . $end
+    2 list: list . '\n'
+    3     | list . asgn '\n'
+    4     | list . expr '\n'
+    5     | list . error '\n'
+
+    $end    shift, and go to state 2
+    error   shift, and go to state 3
+    NUMBER  shift, and go to state 4
+    VAR     shift, and go to state 5
+    BLTIN   shift, and go to state 6
+    '-'     shift, and go to state 7
+    '\n'    shift, and go to state 8
+    '('     shift, and go to state 9
+
+    asgn  go to state 10
+    expr  go to state 11
+
+
+State 2
+
+    0 $accept: list $end .
+
+    $default  accept
+
+
+State 3
+
+    5 list: list error . '\n'
+
+    '\n'  shift, and go to state 12
+
+
+State 4
+
+    7 expr: NUMBER .
+
+    $default  reduce using rule 7 (expr)
+
+
+State 5
+
+    6 asgn: VAR . '=' expr
+    8 expr: VAR .
+
+    '='  shift, and go to state 13
+
+    $default  reduce using rule 8 (expr)
+
+
+State 6
+
+   10 expr: BLTIN . '(' expr ')'
+
+    '('  shift, and go to state 14
+
+
+State 7
+
+   17 expr: '-' . expr
+
+    NUMBER  shift, and go to state 4
+    VAR     shift, and go to state 5
+    BLTIN   shift, and go to state 6
+    '-'     shift, and go to state 7
+    '('     shift, and go to state 9
+
+    asgn  go to state 15
+    expr  go to state 16
+
+
+State 8
+
+    2 list: list '\n' .
+
+    $default  reduce using rule 2 (list)
+
+
+State 9
+
+   16 expr: '(' . expr ')'
+
+    NUMBER  shift, and go to state 4
+    VAR     shift, and go to state 5
+    BLTIN   shift, and go to state 6
+    '-'     shift, and go to state 7
+    '('     shift, and go to state 9
+
+    asgn  go to state 15
+    expr  go to state 17
+
+
+State 10
+
+    3 list: list asgn . '\n'
+    9 expr: asgn .
+
+    '\n'  shift, and go to state 18
+
+    '\n'      [reduce using rule 9 (expr)]
+    $default  reduce using rule 9 (expr)
+
+
+State 11
+
+    4 list: list expr . '\n'
+   11 expr: expr . '+' expr
+   12     | expr . '-' expr
+   13     | expr . '*' expr
+   14     | expr . '/' expr
+   15     | expr . '^' expr
+
+    '+'   shift, and go to state 19
+    '-'   shift, and go to state 20
+    '*'   shift, and go to state 21
+    '/'   shift, and go to state 22
+    '^'   shift, and go to state 23
+    '\n'  shift, and go to state 24
+
+
+State 12
+
+    5 list: list error '\n' .
+
+    $default  reduce using rule 5 (list)
+
+
+State 13
+
+    6 asgn: VAR '=' . expr
+
+    NUMBER  shift, and go to state 4
+    VAR     shift, and go to state 5
+    BLTIN   shift, and go to state 6
+    '-'     shift, and go to state 7
+    '('     shift, and go to state 9
+
+    asgn  go to state 15
+    expr  go to state 25
+
+
+State 14
+
+   10 expr: BLTIN '(' . expr ')'
+
+    NUMBER  shift, and go to state 4
+    VAR     shift, and go to state 5
+    BLTIN   shift, and go to state 6
+    '-'     shift, and go to state 7
+    '('     shift, and go to state 9
+
+    asgn  go to state 15
+    expr  go to state 26
+
+
+State 15
+
+    9 expr: asgn .
+
+    $default  reduce using rule 9 (expr)
+
+
+State 16
+
+   11 expr: expr . '+' expr
+   12     | expr . '-' expr
+   13     | expr . '*' expr
+   14     | expr . '/' expr
+   15     | expr . '^' expr
+   17     | '-' expr .
+
+    '^'  shift, and go to state 23
+
+    $default  reduce using rule 17 (expr)
+
+
+State 17
+
+   11 expr: expr . '+' expr
+   12     | expr . '-' expr
+   13     | expr . '*' expr
+   14     | expr . '/' expr
+   15     | expr . '^' expr
+   16     | '(' expr . ')'
+
+    '+'  shift, and go to state 19
+    '-'  shift, and go to state 20
+    '*'  shift, and go to state 21
+    '/'  shift, and go to state 22
+    '^'  shift, and go to state 23
+    ')'  shift, and go to state 27
+
+
+State 18
+
+    3 list: list asgn '\n' .
+
+    $default  reduce using rule 3 (list)
+
+
+State 19
+
+   11 expr: expr '+' . expr
+
+    NUMBER  shift, and go to state 4
+    VAR     shift, and go to state 5
+    BLTIN   shift, and go to state 6
+    '-'     shift, and go to state 7
+    '('     shift, and go to state 9
+
+    asgn  go to state 15
+    expr  go to state 28
+
+
+State 20
+
+   12 expr: expr '-' . expr
+
+    NUMBER  shift, and go to state 4
+    VAR     shift, and go to state 5
+    BLTIN   shift, and go to state 6
+    '-'     shift, and go to state 7
+    '('     shift, and go to state 9
+
+    asgn  go to state 15
+    expr  go to state 29
+
+
+State 21
+
+   13 expr: expr '*' . expr
+
+    NUMBER  shift, and go to state 4
+    VAR     shift, and go to state 5
+    BLTIN   shift, and go to state 6
+    '-'     shift, and go to state 7
+    '('     shift, and go to state 9
+
+    asgn  go to state 15
+    expr  go to state 30
+
+
+State 22
+
+   14 expr: expr '/' . expr
+
+    NUMBER  shift, and go to state 4
+    VAR     shift, and go to state 5
+    BLTIN   shift, and go to state 6
+    '-'     shift, and go to state 7
+    '('     shift, and go to state 9
+
+    asgn  go to state 15
+    expr  go to state 31
+
+
+State 23
+
+   15 expr: expr '^' . expr
+
+    NUMBER  shift, and go to state 4
+    VAR     shift, and go to state 5
+    BLTIN   shift, and go to state 6
+    '-'     shift, and go to state 7
+    '('     shift, and go to state 9
+
+    asgn  go to state 15
+    expr  go to state 32
+
+
+State 24
+
+    4 list: list expr '\n' .
+
+    $default  reduce using rule 4 (list)
+
+
+State 25
+
+    6 asgn: VAR '=' expr .
+   11 expr: expr . '+' expr
+   12     | expr . '-' expr
+   13     | expr . '*' expr
+   14     | expr . '/' expr
+   15     | expr . '^' expr
+
+    '+'  shift, and go to state 19
+    '-'  shift, and go to state 20
+    '*'  shift, and go to state 21
+    '/'  shift, and go to state 22
+    '^'  shift, and go to state 23
+
+    $default  reduce using rule 6 (asgn)
+
+
+State 26
+
+   10 expr: BLTIN '(' expr . ')'
+   11     | expr . '+' expr
+   12     | expr . '-' expr
+   13     | expr . '*' expr
+   14     | expr . '/' expr
+   15     | expr . '^' expr
+
+    '+'  shift, and go to state 19
+    '-'  shift, and go to state 20
+    '*'  shift, and go to state 21
+    '/'  shift, and go to state 22
+    '^'  shift, and go to state 23
+    ')'  shift, and go to state 33
+
+
+State 27
+
+   16 expr: '(' expr ')' .
+
+    $default  reduce using rule 16 (expr)
+
+
+State 28
+
+   11 expr: expr . '+' expr
+   11     | expr '+' expr .
+   12     | expr . '-' expr
+   13     | expr . '*' expr
+   14     | expr . '/' expr
+   15     | expr . '^' expr
+
+    '*'  shift, and go to state 21
+    '/'  shift, and go to state 22
+    '^'  shift, and go to state 23
+
+    $default  reduce using rule 11 (expr)
+
+
+State 29
+
+   11 expr: expr . '+' expr
+   12     | expr . '-' expr
+   12     | expr '-' expr .
+   13     | expr . '*' expr
+   14     | expr . '/' expr
+   15     | expr . '^' expr
+
+    '*'  shift, and go to state 21
+    '/'  shift, and go to state 22
+    '^'  shift, and go to state 23
+
+    $default  reduce using rule 12 (expr)
+
+
+State 30
+
+   11 expr: expr . '+' expr
+   12     | expr . '-' expr
+   13     | expr . '*' expr
+   13     | expr '*' expr .
+   14     | expr . '/' expr
+   15     | expr . '^' expr
+
+    '^'  shift, and go to state 23
+
+    $default  reduce using rule 13 (expr)
+
+
+State 31
+
+   11 expr: expr . '+' expr
+   12     | expr . '-' expr
+   13     | expr . '*' expr
+   14     | expr . '/' expr
+   14     | expr '/' expr .
+   15     | expr . '^' expr
+
+    '^'  shift, and go to state 23
+
+    $default  reduce using rule 14 (expr)
+
+
+State 32
+
+   11 expr: expr . '+' expr
+   12     | expr . '-' expr
+   13     | expr . '*' expr
+   14     | expr . '/' expr
+   15     | expr . '^' expr
+   15     | expr '^' expr .
+
+    '^'  shift, and go to state 23
+
+    $default  reduce using rule 15 (expr)
+
+
+State 33
+
+   10 expr: BLTIN '(' expr ')' .
+
+    $default  reduce using rule 10 (expr)
