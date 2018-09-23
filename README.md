@@ -9,5 +9,9 @@ To run the codes under Linux,
 bison hoc.y
 gcc hoc.tab.c -o hoc1
 ./hoc1
+
+cd stage3
+make
+./hoc3
 ```
 
