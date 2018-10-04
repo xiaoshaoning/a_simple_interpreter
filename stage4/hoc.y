@@ -35,7 +35,7 @@ expr:    NUMBER            { code2(constpush, (Inst)$1); }
        | expr '+' expr     { code(add); }
        | expr '-' expr     { code(sub); }
        | expr '*' expr     { code(mul); }
-       | expr '/' expr     { code(div); }
+       | expr '/' expr     { code(division); }
        | expr '^' expr     { code(power); }
        | '-' expr %prec UNARYMINUS { code(negate); }
        ;

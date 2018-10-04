@@ -1,5 +1,8 @@
 #include "hoc.h"
 #include "y.tab.h"
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
 static Symbol * symlist = 0; /* symbol table: linked list */
 
@@ -31,9 +34,9 @@ Symbol * install(char * s, int t, double d)
 
 void * emalloc(unsigned int n)          /* check return from malloc */
 {
-    char *p, *malloc();
+    char *p;
 
-    p = malloc(n);
+    p = (char *) malloc(n);
 
 	if (p == 0)
 		printf("out of memory\n");

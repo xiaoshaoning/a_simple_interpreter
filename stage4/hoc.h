@@ -25,7 +25,7 @@ typedef void (*Inst)();  /* interpreter stack type */
 #define STOP (Inst) 0
 
 extern Inst prog[];
-extern void eval(), add(), sub(), mul(), div(), negate(), power();
+extern void eval(), add(), sub(), mul(), division(), negate(), power();
 extern void assign(), bltin(), varpush(), constpush(), print();
 
 Inst *code(Inst f);

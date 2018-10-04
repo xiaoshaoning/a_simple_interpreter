@@ -94,7 +94,7 @@ void mul()
     push(d1);
 }
 
-void div()
+void division()
 {
 
     Datum d1, d2;

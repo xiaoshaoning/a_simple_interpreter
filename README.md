@@ -10,8 +10,8 @@ bison hoc.y
 gcc hoc.tab.c -o hoc1
 ./hoc1
 
-cd stage3
+cd stage4
 make
-./hoc3
+./hoc4
 ```
 
