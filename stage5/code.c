@@ -170,8 +170,8 @@ void prexpr()
 void gt()
 {
     Datum d1, d2;
-	d1 = pop();
 	d2 = pop();
+	d1 = pop();
 	d1.val = (double)(d1.val > d2.val);
 	push(d1);
 }
@@ -179,8 +179,8 @@ void gt()
 void lt()
 {
     Datum d1, d2;
-    d1 = pop();
     d2 = pop();
+    d1 = pop();
     d1.val = (double)(d1.val < d2.val);
     push(d1);
 }
@@ -197,8 +197,8 @@ void eq()
 void ge()
 {
     Datum d1, d2;
-    d1 = pop();
     d2 = pop();
+    d1 = pop();
     d1.val = (double)(d1.val >= d2.val);
     push(d1);
 }
@@ -206,8 +206,8 @@ void ge()
 void le()
 {
     Datum d1, d2;
-    d1 = pop();
     d2 = pop();
+    d1 = pop();
     d1.val = (double)(d1.val <= d2.val);
     push(d1);
 }
